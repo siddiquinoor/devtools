@@ -75,4 +75,29 @@
 
     This will let you execute linux command like `ls`, `cd` and so on.
 
-14.
+14. Let's create a docker from scratch. We are going to create a docker image
+
+        $ mkdir radis-image
+        $ cd redis-image
+        $ code .
+Create a file name 'Dockerfile' without any extension then write the following:
+
+        # Use an existing docker image as a base
+        FROM alpine
+
+        # Download and insatll a dependency
+        RUN apk add --update redis
+
+        # Tell the image what to do when it starts
+        # as a container 
+        CMD ["redis-server"]
+
+Then save the file and run the following command in command line on the same directory
+
+        $ docker build . # note the . here
+
+Note: If you found any error something like "Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running?", it means docker is not running in your computer. Now you have to run the Docker executable form your system.
+
+After successul build run the following command to run the docker image:
+
+                $
