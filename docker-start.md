@@ -77,20 +77,21 @@
 
 14. Let's create a docker from scratch. We are going to create a docker image
 
-        $ mkdir radis-image
-        $ cd redis-image
-        $ code .
-Create a file name 'Dockerfile' without any extension then write the following:
+            $ mkdir radis-image
+            $ cd redis-image
+            $ code .
 
-        # Use an existing docker image as a base
-        FROM alpine
+    Create a file name 'Dockerfile' without any extension then write the following:
 
-        # Download and insatll a dependency
-        RUN apk add --update redis
+            # Use an existing docker image as a base
+            FROM alpine
 
-        # Tell the image what to do when it starts
-        # as a container 
-        CMD ["redis-server"]
+            # Download and insatll a dependency
+            RUN apk add --update redis
+
+            # Tell the image what to do when it starts
+            # as a container
+            CMD ["redis-server"]
 
 Then save the file and run the following command in command line on the same directory
 
@@ -101,3 +102,8 @@ Note: If you found any error something like "Cannot connect to the Docker daemon
 After successul build run the following command to run the docker image:
 
                 $
+
+# Docker kill
+
+        $ pkill -SIGHUP -f /Applications/Docker.app 'docker serve'
+
