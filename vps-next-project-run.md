@@ -41,3 +41,13 @@ And follow this article: https://mxd.codes/articles/hosting-next-js-private-serv
 ## Kill PM2 Process
 
     $ pm2 kill
+
+## Auto restart apps on file change (https://pm2.keymetrics.io/docs/usage/watch-and-restart/)
+
+    $ pm2 start npm --name "AnyName" -- run dev --watch
+
+    or via configuration file set the option `watch: true`
+
+# Check log while running watch mode
+
+    $ pm2 log
