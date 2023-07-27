@@ -43,9 +43,13 @@ Wait for the instance to run.
 
 ## Add a new user into EC2
 
+From local machine:
+
     $ ssh-keygen -y
     Enter the path of the .pem file
     Copy the ssh-rsa
+
+From EC2:
 
     $ sudo adduser siddiquinoor
     $ sudo su - siddiquinoor
@@ -70,29 +74,24 @@ Wait for the instance to run.
     $ sudo npm install -g n
     $ sudo n stable
 
+****IMPORTANT:: Exit terminal, Reboot EC2 Instance and then run the following command to check the version****
+
+    $ node -v
+    $ npm -v
+
 ## Clone Git repository into EC2
 
-1. In EC2 Terminal:
-    $ ssh-keygen -t rsa -b 4096 -C [your email address]
-    $ chmod 600 ~/.ssh/id_rsa
-    $ cat ~/.ssh/id_rsa.pub
-    Copy the public key
+1. EC2 machine terminal run the following command to generate ssh key
 
-1. Go to Github > Setting > SSH and GPG Keys
+    $ ssh-keygen -t ed25519 -C apps.technology.gcc@gmail.com
 
-1. Create `New SSH Key`
+    Can skip adding file name and passpharase.
 
-1. Paste the code from `~/.ssh/id_rsa.pub`
+1. Run command to copy the public key and copy it
 
-1. Give it a name and Save
+    $ cat ~/.ssh/id_ed25519.pub
 
-1. Sometimes it needs to move the public key to “/.ssh/authorized_keys” to make the public key to work in LINUX.
-
-    $ mkdir ~/.ssh  # if you don't have /.ssh/ folder
-    $ chmod 700 ~/.ssh
-    $ touch ~/.ssh/authorized_keys
-    $ chmod 600 ~/.ssh/authorized_keys
-    $ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+1. Go to Github > Setting > SSH Key page and add `New SSH key` paste the copied code 
 
 1. Now clone reposity using ssh
     $ git clone git@github.com:apps-technology-gcc/gcc-webapp.git
