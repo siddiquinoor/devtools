@@ -103,6 +103,10 @@ From EC2:
     $ npm run dev
 
     At this moment site should not load because of Security group inbound rules in EC2 instance
+
+** Npm install cannot find module 'semver' **
+`Exit from terminal and ssh again`
+
 ## Add inbound rules into EC2
 1. Select EC2 Instance 
 1. Locate `Security` Tab
@@ -114,14 +118,13 @@ From EC2:
 
 Now refresh the page, site should load !!!!
 
-** Npm install cannot find module 'semver' **
-`Exit from terminal and ssh again`
+
 
 ## Install PM2 daemon to run the NodeJS app forever
 
 ## Setup PM2
 
-     $ npm install pm2@latest -g
+     $ sudo npm install pm2@latest -g
 
 ## Now we will need to create/configure an ecosystem.config.js file which will restart the default Next.js server.
 
@@ -168,7 +171,7 @@ And follow this article: https://mxd.codes/articles/hosting-next-js-private-serv
 
 ## Check log while running watch mode
 
-    $ pm2 log
+    $ pm2 logs
 
 
 ## Adding Code Deploy (ref: https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install-ubuntu.html)
@@ -201,7 +204,11 @@ Change the `cd /path to match with project directory`
     $ sudo apt install ruby-full
     $ sudo apt install wget
     $ cd /home/ubuntu
-    $ wget https://aws-codedeploy-me-central-1.s3.me-central-1.amazonaws.com/latest/install
+
+    Now before running the following command change the region 
+
+    $ wget https://aws-codedeploy-<aws-region>.s3.<aws-region>.amazonaws.com/latest/install
+    
     `Note the region above`
 
     $ chmod +x ./install
