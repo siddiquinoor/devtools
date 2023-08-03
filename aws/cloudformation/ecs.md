@@ -10,7 +10,7 @@
 Command:
 
 ```bash
-aws cloudformation create-stack --capabilities CAPABILITY_IAM --stack-name gcc-ecs-core-infrastructure --template-body file://./core-infrastructure-setup.yml
+aws --region me-south-1 cloudformation create-stack --capabilities CAPABILITY_IAM --stack-name gcc-ecs-core-infrastructure --template-body file://./core-infrastructure-setup.yml
 ```
 
 
@@ -21,7 +21,7 @@ Command to apply the CloudFormation template
 Launchtype _EC2_:
 
 ```bash
-aws cloudformation create-stack --stack-name gcc-ecs-type-ec2 --capabilities CAPABILITY_IAM --template-body file://./ecs-ec2-with-cf.yml
+aws --region me-south-1 cloudformation create-stack --stack-name gcc-ecs-type-ec2 --capabilities CAPABILITY_IAM --template-body file://./ecs-ec2-with-cf.yml
 ```
 
 
