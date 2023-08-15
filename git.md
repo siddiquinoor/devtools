@@ -20,3 +20,16 @@ Assuming you did commit it, then:
 Assuming you want to blow away all commits from your branch (VERY DESTRUCTIVE):
 
     git reset --hard origin/master
+
+
+# Delete branch from local or remote
+
+To remove a local branch from your machine
+
+    git branch -d {local_branch}
+
+(use -D instead to force deleting the branch without checking merged status);
+
+to remove a remote branch from the server:
+
+    git push origin -d {remote_branch}
