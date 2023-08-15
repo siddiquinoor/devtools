@@ -159,8 +159,17 @@ And follow this article: https://mxd.codes/articles/hosting-next-js-private-serv
 
 ## Run a Node JS (Next.js) app in Development mode
 
-    pm2 start npm --name "AnyName" -- run dev
-    pm2 save
+1. For Dev mode
+
+        pm2 start npm --name "AnyName" -- run dev
+
+1. For Production mode
+
+        pm2 start npm --name "AnyName" -- run start
+
+1. Now save 
+
+        pm2 save
 
 ## Kill PM2 Process
 
@@ -170,53 +179,80 @@ And follow this article: https://mxd.codes/articles/hosting-next-js-private-serv
 
     pm2 start npm --name "AnyName" -- run dev --watch
 
-    or via configuration file set the option `watch: true`
+or via configuration file set the option `watch: true`
+
 
 ## Check log while running watch mode
 
     pm2 logs
 
 
+
+We have successfully deployed the Next.js app manually. But remember, every time you make a code change and want to see the changes on your site, you have to login into EC2, pull the latest changes, build the app, and restart the app.
+
+This will consume a lot of time and I'm too lazy to do it. So let's automate this in the next step!
+
+Before setting up automatic deployment you have to know how CodeDeploy works.
+## What is CodeDeploy?
+
+CodeDeploy lets you deploy your application automatically to any number of EC2 instances. We need to prepare two items before beginning this process:
+
+1. CodeDeploy Agent must be installed in the EC2 instance. We use this to continuously poll CodeDeploy and deploy if any new changes are available.
+
+1. A file called appspec.yml must be present in the root folder. This file describes the steps to be followed for the deployment.
+
+
 ## Adding Code Deploy (ref: https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install-ubuntu.html)
 
 1. Create a file named `appspec.yml` in projet root directory and paste the following code
-```
-version: 0.0
-os: linux
-hooks:
-  ApplicationStart:
-    - location: deploy.sh
-      timeout: 300
-      runas: ubuntu
-```
+    ```
+    version: 0.0
+    os: linux
+    hooks:
+    ApplicationStart:
+        - location: deploy.sh
+        timeout: 300
+        runas: ubuntu
+    ```
 
 1. Create another file name `deploy.sh` and paste the following code:
-```
-#!/bin/bash
-cd /home/siddiquinoor/gcc-webapp 
-git pull origin pipeline
-npm install &&
-npm build &&
-pm2 restart gcc 
-```
+    ```
+    #!/bin/bash
+    cd /home/siddiquinoor/gcc-webapp 
+    git pull origin pipeline
+    npm install &&
+    npm build &&
+    pm2 restart gcc 
+    ```
 Change the `cd /path to match with project directory`
 
 
+## Follow each and every step to install CodeDeploy Agent on your EC2 machine.
+
 1. Run commands
-    sudo apt update
-    sudo apt install ruby-full
-    sudo apt install wget
-    cd /home/ubuntu
+
+        sudo apt update
+        sudo apt install ruby-full
+        sudo apt install wget
+        cd /home/ubuntu
 
     Now before running the following command change the region 
 
-    wget https://aws-codedeploy-<aws-region>.s3.<aws-region>.amazonaws.com/latest/install
-    
+        wget https://aws-codedeploy-<aws-region>.s3.<aws-region>.amazonaws.com/latest/install
+        
     `Note the region above`
 
-    chmod +x ./install
-    sudo ./install auto
-    sudo service codedeploy-agent status
+        chmod +x ./install
+        sudo ./install auto
+        sudo service codedeploy-agent status
+
+
+
+
+
+
+
+
 
 Now follow this link for Code Deploy:
 https://www.freecodecamp.org/news/ci-cd-pipeline-for-nextjs-app-with-aws/
