@@ -34,73 +34,76 @@ Use AWS console to create an EC2 intance with the following configuration:
 Wait for the instance to run.
 
 ## If a new .pem is generated then follow this steps
-    $ chmod 600 key-pair-name.pem
+    chmod 600 key-pair-name.pem
 
 
 ## Login to EC2 from terminal
 
-    $ ssh -i /path/key-pair-name.pem ubuntu@public_ip_address
+    ssh -i /path/key-pair-name.pem ubuntu@public_ip_address
 
 ## Add a new user into EC2
 
 From local machine:
 
-    $ ssh-keygen -y
+    ssh-keygen -y
     Enter the path of the .pem file
     Copy the ssh-rsa
 
 From EC2:
 
-    $ sudo adduser siddiquinoor
-    $ sudo su - siddiquinoor
-    $ id
-    $ pwd
-    $ mkdir .ssh
-    $ chmod 700 .ssh
-    $ touch .ssh/authorized_keys
-    $ chmod 600 .ssh/aurhorized_keys
-    $ cat >> .ssh/authorized_keys
+    sudo adduser siddiquinoor
+    sudo su - siddiquinoor
+    id
+    pwd
+    mkdir .ssh
+    chmod 700 .ssh
+    touch .ssh/authorized_keys
+    chmod 600 .ssh/aurhorized_keys
+    cat >> .ssh/authorized_keys
     Paste the ssh-rsa text then press Enter and then press ctrl + D
 
-    $ cat .ssh/authorized_keys
+    cat .ssh/authorized_keys
 
 ## Installing Node Using the Node Version Manager (latest)
 
-    $ sudo apt update
-    $ sudo apt install nodejs
-    $ node -v    
-    $ sudo apt install npm
-    $ sudo npm cache clean -f
-    $ sudo npm install -g n
-    $ sudo n stable
+    sudo apt update
+    sudo apt install nodejs
+    node -v    
+    sudo apt install npm
+    sudo npm cache clean -f
+    sudo npm install -g n
+    sudo n stable
 
 ****IMPORTANT:: Exit terminal, Reboot EC2 Instance and then run the following command to check the version****
 
-    $ node -v
-    $ npm -v
+    node -v
+    npm -v
 
 ## Clone Git repository into EC2
 
 1. EC2 machine terminal run the following command to generate ssh key
 
-    $ ssh-keygen -t ed25519 -C apps.technology.gcc@gmail.com
+        ssh-keygen -t ed25519 -C apps.technology.gcc@gmail.com
 
     Can skip adding file name and passpharase.
 
 1. Run command to copy the public key and copy it
 
-    $ cat ~/.ssh/id_ed25519.pub
+        cat ~/.ssh/id_ed25519.pub
 
-1. Go to Github > Setting > SSH Key page and add `New SSH key` paste the copied code 
+1. Go to `Github > Setting > SSH Key`` page and add `New SSH key` paste the copied code 
 
 1. Now clone reposity using ssh
-    $ git clone git@github.com:apps-technology-gcc/gcc-webapp.git
+
+        git clone git@github.com:apps-technology-gcc/gcc-webapp.git
 
 
 ## Testing Next.js app using `npm run`
+
 1. Navigate to the project and install the dependencies
-    $ npm install
-    $ npm run dev
+
+        npm install
+        npm run dev
 
     At this moment site should not load because of Security group inbound rules in EC2 instance
 
@@ -124,11 +127,11 @@ Now refresh the page, site should load !!!!
 
 ## Setup PM2
 
-     $ sudo npm install pm2@latest -g
+     sudo npm install pm2@latest -g
 
 ## Now we will need to create/configure an ecosystem.config.js file which will restart the default Next.js server.
 
-    $ Create a file in web root directory `ecosystem.config.js`
+    Create a file in web root directory `ecosystem.config.js`
 
     Copy/paste the template and replace the content.
 
@@ -152,26 +155,26 @@ And follow this article: https://mxd.codes/articles/hosting-next-js-private-serv
 
 ## Check status
 
-    $ pm2 status
+    pm2 status
 
 ## Run a Node JS (Next.js) app in Development mode
 
-    $ pm2 start npm --name "AnyName" -- run dev
-    $ pm2 save
+    pm2 start npm --name "AnyName" -- run dev
+    pm2 save
 
 ## Kill PM2 Process
 
-    $ pm2 kill
+    pm2 kill
 
 ## Auto restart apps on file change (https://pm2.keymetrics.io/docs/usage/watch-and-restart/)
 
-    $ pm2 start npm --name "AnyName" -- run dev --watch
+    pm2 start npm --name "AnyName" -- run dev --watch
 
     or via configuration file set the option `watch: true`
 
 ## Check log while running watch mode
 
-    $ pm2 logs
+    pm2 logs
 
 
 ## Adding Code Deploy (ref: https://docs.aws.amazon.com/codedeploy/latest/userguide/codedeploy-agent-operations-install-ubuntu.html)
@@ -200,20 +203,20 @@ Change the `cd /path to match with project directory`
 
 
 1. Run commands
-    $ sudo apt update
-    $ sudo apt install ruby-full
-    $ sudo apt install wget
-    $ cd /home/ubuntu
+    sudo apt update
+    sudo apt install ruby-full
+    sudo apt install wget
+    cd /home/ubuntu
 
     Now before running the following command change the region 
 
-    $ wget https://aws-codedeploy-<aws-region>.s3.<aws-region>.amazonaws.com/latest/install
+    wget https://aws-codedeploy-<aws-region>.s3.<aws-region>.amazonaws.com/latest/install
     
     `Note the region above`
 
-    $ chmod +x ./install
-    $ sudo ./install auto
-    $ sudo service codedeploy-agent status
+    chmod +x ./install
+    sudo ./install auto
+    sudo service codedeploy-agent status
 
 Now follow this link for Code Deploy:
 https://www.freecodecamp.org/news/ci-cd-pipeline-for-nextjs-app-with-aws/
