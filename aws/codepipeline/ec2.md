@@ -1,4 +1,4 @@
-# Working with AWS EC2 intance
+# Working with AWS Codepipeline with EC2 intance
 
 1. Prerequisites
 1. How to Deploy the Next.js App to AWS EC2

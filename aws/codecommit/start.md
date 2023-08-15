@@ -1,4 +1,4 @@
-# Create Repository in AWS CodeCommit
+# Create Repository in AWS CodeCommit and configure local PC to work on them
 
 ## Step 1: Register SSH Public Key
 
