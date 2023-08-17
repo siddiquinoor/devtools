@@ -178,6 +178,8 @@ arn:aws:iam::761799505441:policy/AWSLoadBalancerControllerIAMPolicy
 
 Ref: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/ingress/ingress_class/
 
+1. Create a new file named `ingress-default-class.yaml` to deploy using `kubectl apply -f <file_name>` and add the following code:
+
     apiVersion: networking.k8s.io/v1
         kind: IngressClass
         metadata:
