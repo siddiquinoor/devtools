@@ -1,4 +1,4 @@
-# Working with AWS Codepipeline with EC2 intance
+# Working with AWS Codepipeline CI/CD with EC2 intance
 
 1. Prerequisites
 1. How to Deploy the Next.js App to AWS EC2
@@ -46,8 +46,10 @@ Wait for the instance to run.
 From local machine:
 
     ssh-keygen -y
-    Enter the path of the .pem file
-    Copy the ssh-rsa
+
+Enter the path of the rsa file
+
+Copy the `ssh-rsa``
 
 From EC2:
 
@@ -74,7 +76,7 @@ From EC2:
     sudo npm install -g n
     sudo n stable
 
-****IMPORTANT:: Exit terminal, Reboot EC2 Instance and then run the following command to check the version****
+****IMPORTANT:: Reboot EC2 Instance, Exit terminal and then login again to run the following command for checking the version****
 
     node -v
     npm -v
