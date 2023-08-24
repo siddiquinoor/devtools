@@ -128,12 +128,17 @@ arn:aws:iam::761799505441:policy/AWSLoadBalancerControllerIAMPolicy
 ## Using HELM3 Add the eks-charts repository.
 
     helm repo add eks https://aws.github.io/eks-charts
-
 ### Update your local repo to make sure that you have the most recent charts.
 
     helm repo update
 
 ## Install the AWS Load Balancer Controller.
+
+### Note
+- Check for the clusterName
+- Check for the region
+- Get the VPC ID from AWS Console and change it
+- Get the image.repository URL from this link and change it (https://docs.aws.amazon.com/eks/latest/userguide/add-ons-images.html)
 
     helm install aws-load-balancer-controller eks/aws-load-balancer-controller -n kube-system --set clusterName=edge-gcc --set serviceAccount.create=false --set serviceAccount.name=aws-load-balancer-controller --set region=eu-west-2 --set vpcId=vpc-0dbffb4498dff156f --set image.repository=602401143452.dkr.ecr.eu-west-2.amazonaws.com/amazon/aws-load-balancer-controller
 
@@ -184,7 +189,7 @@ arn:aws:iam::761799505441:policy/AWSLoadBalancerControllerIAMPolicy
 Ref: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/ingress/ingress_class/
 
 1. Create a new file named `ingress-default-class.yaml` to deploy using `kubectl apply -f <file_name>` and add the following code:
-
+```
     apiVersion: networking.k8s.io/v1
         kind: IngressClass
         metadata:
@@ -193,6 +198,7 @@ Ref: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/i
                 ingressclass.kubernetes.io/is-default-class: "true"
         spec:
             controller: ingress.k8s.aws/alb
+```
 
 ### Create JWT secret for Client-Server token based communicaiton
 
