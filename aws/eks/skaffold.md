@@ -120,6 +120,11 @@ arn:aws:iam::761799505441:policy/AWSLoadBalancerControllerIAMPolicy
 
     kubectl describe sa aws-load-balancer-controller -n kube-system
 
+## Creating AWS Load Balancer Controller Deployment using Helm
+
+    # Install `helm` if it is not already installed
+    brew install helm
+
 ## Using HELM3 Add the eks-charts repository.
 
     helm repo add eks https://aws.github.io/eks-charts
