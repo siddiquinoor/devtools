@@ -32,3 +32,30 @@
 #### Switch to other branch
 
     $ git checkout <branch_name>
+
+## Git Tag
+
+### List all tags
+
+    git tags -l
+
+### Create Tags
+
+   git tag -a v0.0.2 -m "Initial Microservice"
+
+### Push Tags
+
+    git push origin v0.0.2
+
+### Checkout from Tags
+
+    git clone   # clone whole repository
+    git tags -l # list all tags
+    git checkout tags/v0.0.2
+
+### Even better, checkout and create a branch 
+
+    git checkout tags/v0.0.2 -b new_branch
+
+    
+

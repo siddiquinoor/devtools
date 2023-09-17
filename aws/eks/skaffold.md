@@ -190,14 +190,14 @@ Ref: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.4/guide/i
 
 1. Create a new file named `ingress-default-class.yaml` to deploy using `kubectl apply -f <file_name>` and add the following code:
 ```
-    apiVersion: networking.k8s.io/v1
-        kind: IngressClass
-        metadata:
-            name: my-aws-ingress-class
-            annotations:
-                ingressclass.kubernetes.io/is-default-class: "true"
-        spec:
-            controller: ingress.k8s.aws/alb
+apiVersion: networking.k8s.io/v1
+    kind: IngressClass
+    metadata:
+        name: my-aws-ingress-class
+        annotations:
+            ingressclass.kubernetes.io/is-default-class: "true"
+    spec:
+        controller: ingress.k8s.aws/alb
 ```
 
 ### Create JWT secret for Client-Server token based communicaiton
