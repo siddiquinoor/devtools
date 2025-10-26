@@ -1,35 +1,76 @@
-# Create new branch with an existing branch
+# Next.js Fundamental
 
-    git checkout -b new_branch master
+## Create new project (if NPX already installed)
 
-# How to revert to any branch (Ref: https://stackoverflow.com/questions/1817766/how-to-revert-to-origins-master-branchs-version-of-file)
+    npx create-next-app
 
-Assuming you did not commit the file, or add it to the index, then:
+## Folder structure
 
-    git checkout -- filename
+Private folder
 
-Assuming you added it to the index, but did not commit it, then:
+    app/_lib
 
-    git reset HEAD filename
-    git checkout -- filename
+Route group with omit folder name from URL
 
-Assuming you did commit it, then:
+    (auth)/register
+    (auth)/login
+    URL will be: /register, /login etc.
 
-    git checkout origin/master filename
+Passing params via URL
 
-Assuming you want to blow away all commits from your branch (VERY DESTRUCTIVE):
+    /product/[productID]
 
-    git reset --hard origin/master
+Adding image sources under next.config.js
 
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "picsum.photos",
+                port: "",
+                pathname: "",
+            }
+        ]
+    }
 
-# Delete branch from local or remote
+## Using Lucide icons
 
-To remove a local branch from your machine
+To use Lucide icon add package (Ref: Lucide.dev)
 
-    git branch -d {local_branch}
+    npm install lucide-react    // then import icon and use it
 
-(use -D instead to force deleting the branch without checking merged status);
+## Active link
 
-to remove a remote branch from the server:
+Check path from URL and compare it with the link to add .active class
 
-    git push origin -d {remote_branch}
+    import { usePathname } from "next/navigation"
+    const pathName = usePathname();
+    const isActive = pathName === link.href;
+
+example of use:
+
+    import Link from "next/link";
+    import { usePathname } from "next/navigation";
+
+    const navLinks = [
+        { name: "Home", href: "/" },
+        { name: "About", href: "/about" },
+        { name: "Service", href: "/services" },
+        { name: "Contact", href: "/contact" },
+    ];
+
+    <ul className="flex flex-row items-center gap-2">
+        {navLinks.map((link) => {
+
+            const isActive = pathName === link.href;
+
+            return (
+              <li key={link.name}>
+                <Link href={link.href} className={`nav-link ${isActive && 'active'}`}>
+                  {link.name}
+                </Link>
+              </li>
+            );
+        })}
+    </ul>
+
