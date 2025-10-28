@@ -14,7 +14,7 @@
 
 ## Create micro-services using mono-repo
 
-![image](architecture.png)
+![image](asset/architecture.png)
 
     nest generate app talasca
     nest generate app auth
@@ -29,7 +29,7 @@
 
 ## Each Services can have different database
 
-![image](services.png)
+![image](asset/services.png)
 
 ## Add docker-compose.yml to run MongoDB in Docker container
 Create a file named `docker-compose.yml` in root
@@ -74,7 +74,7 @@ To run the MongoDB inside container, run
     DATABASE_URL="mongodb://localhost:27017/db_name"
 
 ## Sample ERD of Talasca
-![alt text](erd.png)
+![alt text](asset/erd.png)
 
 ## Update Schema  `prisma/schema.prisma`
 
