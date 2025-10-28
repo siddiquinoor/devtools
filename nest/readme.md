@@ -416,6 +416,12 @@ User should be created into the MongoDB Server
 
 ## Authentication using JWT and Passport
 
+    npm i @nestjs/config
     npm i @nestjs/jwt @nestjs/passport passport passport-jwt passport-local
     npm i -D @types/passport-jwt @types/passport-local
     
+Adding bcrypt to hash password
+
+    npm i bcrypt 
+    npm i -D @types/bcrypt
+
