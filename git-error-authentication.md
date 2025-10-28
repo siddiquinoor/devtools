@@ -19,3 +19,8 @@ Example:
 - Step - 07: Enter an Note and then by selecting options click on "Generate token".
 
 Finally copy the token and use it as a password in your command line when it prompts for Password.
+
+### Set Remote URL using PAT
+
+    git remote set-url origin https://<siddiquinoor>:<PAT>@github.com/siddiquinoor/repository.git
+
