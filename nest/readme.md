@@ -425,3 +425,16 @@ Adding bcrypt to hash password
     npm i bcrypt 
     npm i -D @types/bcrypt
 
+## Important Note
+Server side login, environment verialble or any business logic should remain on server side.
+Developer can accidentaly load any server releted files, functions or logic, so we should protect
+that by adding a package server only:
+
+    npm i server-only
+
+And then import the module in server releted files/libraries like the following:
+
+    import "server-only"
+
+    This will prevent adding server side logic and throws error.
+
