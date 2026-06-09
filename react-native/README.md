@@ -1,9 +1,12 @@
 # React Native with EXPO 
-Ref: https://github.com/piyush-eon/react-native-course/
+Ref: 
+1. https://github.com/bradtraversy/macrozone/blob/master/STEPS.md
+1. https://github.com/piyush-eon/react-native-course/
 
 ## Create project using NPM command (assuming that npm is installed)
 
-    npm create expo-app todo
+    # npm create expo-app mobile
+    npx create-expo-app@latest mobile --template expo-template-tabs@54
 
 Then 
 
@@ -46,18 +49,15 @@ Then
 
 ### Create a file `touch babel.config.js` and copy the code below:
 
-    /** @type {import('tailwindcss').Config} */
-    module.exports = {
-    content: [
-        "./App.{js,jsx,ts,tsx}",
-        "./app/**/*.{js,jsx,ts,tsx}",
-        "./components/**/*.{js,jsx,ts,tsx}",
-    ],
-    presets: [require("nativewind/preset")],
-    theme: {
-        extend: {},
-    },
-    plugins: [],
+    module.exports = function (api) {
+    api.cache(true);
+    return {
+        presets: [
+        ["babel-preset-expo", { jsxImportSource: "nativewind" }],
+        "nativewind/babel",
+        ],
+        plugins: ["react-native-reanimated/plugin"],
+    };
     };
 
 ### Configure Metro (`touch metro.config.js`) and copy the code below:
